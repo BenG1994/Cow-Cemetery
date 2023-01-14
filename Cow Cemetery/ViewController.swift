@@ -16,6 +16,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerTwoNameText: UITextField!
     @IBOutlet weak var numberOfCowsPlayerTwo: UILabel!
     @IBOutlet weak var playerTwoCows: UILabel!
+    @IBOutlet weak var playerOneCemeteries: UILabel!
+    @IBOutlet weak var playerTwoCemeteries: UILabel!
+    
     
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
