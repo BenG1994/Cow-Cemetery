@@ -13,6 +13,7 @@
 		2E3ED9EE2971B2A800150CF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3ED9EC2971B2A800150CF3 /* Main.storyboard */; };
 		2E3ED9F02971B2AA00150CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E3ED9EF2971B2AA00150CF3 /* Assets.xcassets */; };
 		2E3ED9F32971B2AA00150CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3ED9F12971B2AA00150CF3 /* LaunchScreen.storyboard */; };
+		2EB2E40529738E2200E1E0A7 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB2E40429738E2200E1E0A7 /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EB2E40529738E2200E1E0A7 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = "Cow Cemetery";
+			packageProductDependencies = (
+				2EB2E40429738E2200E1E0A7 /* IQKeyboardManagerSwift */,
+			);
 			productName = "Cow Cemetery";
 			productReference = 2E3ED9E32971B2A800150CF3 /* Cow Cemetery.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = 2E3ED9DA2971B2A800150CF3;
+			packageReferences = (
+				2EB2E40329738E2200E1E0A7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = 2E3ED9E42971B2A800150CF3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -370,6 +378,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2EB2E40329738E2200E1E0A7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2EB2E40429738E2200E1E0A7 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EB2E40329738E2200E1E0A7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2E3ED9DB2971B2A800150CF3 /* Project object */;
 }
