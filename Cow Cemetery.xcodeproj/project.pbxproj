@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E29FF8629745BF000D44430 /* CowMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29FF8529745BF000D44430 /* CowMath.swift */; };
+		2E29FF892974611600D44430 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2E29FF882974611600D44430 /* Realm */; };
+		2E29FF8B2974611600D44430 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2E29FF8A2974611600D44430 /* RealmSwift */; };
 		2E3ED9E72971B2A800150CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3ED9E62971B2A800150CF3 /* AppDelegate.swift */; };
 		2E3ED9E92971B2A800150CF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3ED9E82971B2A800150CF3 /* SceneDelegate.swift */; };
 		2E3ED9EB2971B2A800150CF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3ED9EA2971B2A800150CF3 /* ViewController.swift */; };
@@ -17,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E29FF8529745BF000D44430 /* CowMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CowMath.swift; sourceTree = "<group>"; };
 		2E3ED9E32971B2A800150CF3 /* Cow Cemetery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cow Cemetery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E3ED9E62971B2A800150CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E3ED9E82971B2A800150CF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E29FF8B2974611600D44430 /* RealmSwift in Frameworks */,
+				2E29FF892974611600D44430 /* Realm in Frameworks */,
 				2EB2E40529738E2200E1E0A7 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,6 +67,7 @@
 				2E3ED9E62971B2A800150CF3 /* AppDelegate.swift */,
 				2E3ED9E82971B2A800150CF3 /* SceneDelegate.swift */,
 				2E3ED9EA2971B2A800150CF3 /* ViewController.swift */,
+				2E29FF8529745BF000D44430 /* CowMath.swift */,
 				2E3ED9EC2971B2A800150CF3 /* Main.storyboard */,
 				2E3ED9EF2971B2AA00150CF3 /* Assets.xcassets */,
 				2E3ED9F12971B2AA00150CF3 /* LaunchScreen.storyboard */,
@@ -87,6 +94,8 @@
 			name = "Cow Cemetery";
 			packageProductDependencies = (
 				2EB2E40429738E2200E1E0A7 /* IQKeyboardManagerSwift */,
+				2E29FF882974611600D44430 /* Realm */,
+				2E29FF8A2974611600D44430 /* RealmSwift */,
 			);
 			productName = "Cow Cemetery";
 			productReference = 2E3ED9E32971B2A800150CF3 /* Cow Cemetery.app */;
@@ -118,6 +127,7 @@
 			mainGroup = 2E3ED9DA2971B2A800150CF3;
 			packageReferences = (
 				2EB2E40329738E2200E1E0A7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				2E29FF872974611500D44430 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 2E3ED9E42971B2A800150CF3 /* Products */;
 			projectDirPath = "";
@@ -146,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E29FF8629745BF000D44430 /* CowMath.swift in Sources */,
 				2E3ED9EB2971B2A800150CF3 /* ViewController.swift in Sources */,
 				2E3ED9E72971B2A800150CF3 /* AppDelegate.swift in Sources */,
 				2E3ED9E92971B2A800150CF3 /* SceneDelegate.swift in Sources */,
@@ -380,6 +391,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2E29FF872974611500D44430 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		2EB2E40329738E2200E1E0A7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -391,6 +410,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2E29FF882974611600D44430 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E29FF872974611500D44430 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		2E29FF8A2974611600D44430 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E29FF872974611500D44430 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		2EB2E40429738E2200E1E0A7 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2EB2E40329738E2200E1E0A7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;

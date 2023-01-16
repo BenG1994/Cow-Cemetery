@@ -6,10 +6,11 @@
 //
 
 import UIKit
+//import RealmSwift
 
 class ViewController: UIViewController {
     
-   
+    
     @IBOutlet weak var playerOneNameText: UITextField!
     @IBOutlet weak var numberOfCowsPlayerOne: UILabel!
     @IBOutlet weak var playerOneCows: UILabel!
@@ -25,6 +26,9 @@ class ViewController: UIViewController {
     
     let userDefaults = UserDefaults.standard
     
+    //    let realm = try! Realm()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,24 +39,32 @@ class ViewController: UIViewController {
         playerOneNameText.text = userDefaults.value(forKey: "PlayerOneName") as? String ?? "Player 1"
         playerTwoNameText.text = userDefaults.value(forKey: "PlayerTwoName") as? String ?? "Player 2"
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        if userDefaults.value(forKey: "TotalCows") != nil {
+////            numberOfCowsPlayerOne.text = "\(thirdRoundCows) cows"
+//        }else {
+//            numberOfCowsPlayerOne.text = "0 Cows"
+//        }
+        
+        userDefaults.setValue(false, forKey: "AdditionalCows")
+        
+        //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-
-//    @objc func keyboardWillShow(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-//            if self.view.frame.origin.y == 0 {
-//                self.view.frame.origin.y -= keyboardSize.height
-//            }
-//        }
-//    }
-//
-//    @objc func keyboardWillHide(notification: NSNotification) {
-//        if self.view.frame.origin.y != 0 {
-//            self.view.frame.origin.y = 0
-//        }
-//    }
+    
+    //    @objc func keyboardWillShow(notification: NSNotification) {
+    //        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+    //            if self.view.frame.origin.y == 0 {
+    //                self.view.frame.origin.y -= keyboardSize.height
+    //            }
+    //        }
+    //    }
+    //
+    //    @objc func keyboardWillHide(notification: NSNotification) {
+    //        if self.view.frame.origin.y != 0 {
+    //            self.view.frame.origin.y = 0
+    //        }
+    //    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -68,7 +80,78 @@ class ViewController: UIViewController {
     
     
     @IBAction func playerOneSawCows(_ sender: UIButton) {
+        
+        
+        var textField = UITextField()
+        
+        //        textField.reloadInputViews()
+        
+        let alert = UIAlertController(title: "Cows Spotted!", message: "How many cows did you see?", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Cows", style: .default) {(action) in
+            
+            //MARK: - first cows
+            
+            var totalCows = 0
+            var additionalCows = 0
+            let newCows = textField.text!
+            let cowsNumber = Int(newCows)
+            
+            if self.numberOfCowsPlayerOne.text == "0 cows"{
+                self.userDefaults.set(cowsNumber, forKey: "FirstCows")
+                let firstCows = UserDefaults.standard.integer(forKey: "FirstCows")
+                print(firstCows)
+                totalCows += firstCows
+                self.userDefaults.set(totalCows, forKey: "TotalCows")
+                print(totalCows)
+                //                let totalCows = firstCows
+                //                self.userDefaults.set(0, forKey: "FirstAddition")
+                //                self.userDefaults.set(0, forKey: "SecondCows")
+                //                print(totalCows)
+                self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: "FirstCows")!) cows"
+            }else if self.numberOfCowsPlayerOne.text != "# of Cows"{
+                additionalCows = cowsNumber!
+                print(additionalCows)
+                totalCows = UserDefaults.standard.integer(forKey: "TotalCows")
+                totalCows += additionalCows
+                print(totalCows)
+                self.userDefaults.set(totalCows, forKey: "TotalCows")
+                print(totalCows)
+                self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: "TotalCows")!) cows"
+                //                self.userDefaults.set(cowsNumber, forKey: "AdditionalCows")
+                //                let additionalCows = UserDefaults.standard.integer(forKey: "AdditionalCows")
+                //                print(additionalCows)
+                //
+                //                let totalCows = totalCows + additionalCows
+                //                print(totalCows)
+                
+            }
+        
+        }
+        
+        
+        
+        
+        
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = ""
+            textField = alertTextField
+            textField.keyboardType = UIKeyboardType.numberPad
+            
+            
+        }
+        
+        alert.addAction(action)
+        
+        
+        
+        present (alert, animated: true, completion: nil)
+        
+        
     }
+    
+    
     
     
     @IBAction func playerOneCemetery(_ sender: UIButton) {
@@ -94,19 +177,12 @@ extension ViewController: UITextFieldDelegate{
         
         
         
-//        print(playerOneNameText.text!)
-//        playerOneNameText.text = ""
-        
-        
-//        func textFieldShouldReturn(_ playerOneNameText: UITextField) -> Bool {
-//            playerOneNameText.resignFirstResponder()
-//        }
         
     }
     
     @IBAction func playerTwoName(_ sender: UITextField) {
         print (playerTwoNameText.text!)
-  
+        
     }
     
     
@@ -124,20 +200,6 @@ extension ViewController: UITextFieldDelegate{
         print(userDefaults.value(forKey: "PlayerTwoName")!)
         
         
-        ////        let newPlayerTwoName = playerTwoNameText.text
-        ////        print(newPlayerTwoName!)
-        ////        userDefaults.set(newPlayerTwoName, forKey: "PlayerTwoName")
-        ////        print(userDefaults.value(forKey: "PlayerTwoName")!)
-        //    }
-        //
-        //    @IBAction func playerTwoName(_ sender: UITextField) {
-        //
-        //        self.playerTwoNameText.delegate = self
-        //
-        //        print(playerTwoNameText.text!)
-        //        playerTwoNameText.text = ""
-        //
-        //    }
         
         
     }
