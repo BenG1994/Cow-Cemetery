@@ -39,11 +39,17 @@ class ViewController: UIViewController {
         playerOneNameText.text = userDefaults.value(forKey: "PlayerOneName") as? String ?? "Player 1"
         playerTwoNameText.text = userDefaults.value(forKey: "PlayerTwoName") as? String ?? "Player 2"
         
-//        if userDefaults.value(forKey: "TotalCows") != nil {
-////            numberOfCowsPlayerOne.text = "\(thirdRoundCows) cows"
-//        }else {
-//            numberOfCowsPlayerOne.text = "0 Cows"
-//        }
+        if userDefaults.value(forKey: "TotalCows") != nil {
+            numberOfCowsPlayerOne.text = "\(UserDefaults.standard.integer(forKey: "TotalCows")) cows"
+        }else {
+            numberOfCowsPlayerOne.text = "0 Cows"
+        }
+        
+        if userDefaults.value(forKey: "TotalCowsTwo") != nil {
+            numberOfCowsPlayerTwo.text = "\(UserDefaults.standard.integer(forKey: "TotalCowsTwo")) cows"
+        }else {
+            numberOfCowsPlayerTwo.text = "0 Cows"
+        }
         
         userDefaults.setValue(false, forKey: "AdditionalCows")
         
@@ -155,13 +161,92 @@ class ViewController: UIViewController {
     
     
     @IBAction func playerOneCemetery(_ sender: UIButton) {
+        let cemeteryCows = UserDefaults.standard.integer(forKey: "TotalCows") / 2
+        self.userDefaults.set(cemeteryCows, forKey: "TotalCows")
+        print(cemeteryCows)
+        self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: "TotalCows")!) cows"
+        
+        
     }
     
     
     @IBAction func playerTwoSawCows(_ sender: UIButton) {
+        
+        var textField = UITextField()
+        
+        //        textField.reloadInputViews()
+        
+        let alert = UIAlertController(title: "Cows Spotted!", message: "How many cows did you see?", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Cows", style: .default) {(action) in
+            
+            //MARK: - first cows
+            
+            var totalCows = 0
+            var additionalCows = 0
+            let newCows = textField.text!
+            let cowsNumber = Int(newCows)
+            
+            if self.numberOfCowsPlayerTwo.text == "0 cows"{
+                self.userDefaults.set(cowsNumber, forKey: "FirstCowsTwo")
+                let firstCows = UserDefaults.standard.integer(forKey: "FirstCowsTwo")
+                print(firstCows)
+                totalCows += firstCows
+                self.userDefaults.set(totalCows, forKey: "TotalCowsTwo")
+                print(totalCows)
+                //                let totalCows = firstCows
+                //                self.userDefaults.set(0, forKey: "FirstAddition")
+                //                self.userDefaults.set(0, forKey: "SecondCows")
+                //                print(totalCows)
+                self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: "FirstCowsTwo")!) cows"
+            }else if self.numberOfCowsPlayerTwo.text != "# of Cows"{
+                additionalCows = cowsNumber!
+                print(additionalCows)
+                totalCows = UserDefaults.standard.integer(forKey: "TotalCowsTwo")
+                totalCows += additionalCows
+                print(totalCows)
+                self.userDefaults.set(totalCows, forKey: "TotalCowsTwo")
+                print(totalCows)
+                self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: "TotalCowsTwo")!) cows"
+                //                self.userDefaults.set(cowsNumber, forKey: "AdditionalCows")
+                //                let additionalCows = UserDefaults.standard.integer(forKey: "AdditionalCows")
+                //                print(additionalCows)
+                //
+                //                let totalCows = totalCows + additionalCows
+                //                print(totalCows)
+                
+            }
+        
+        }
+        
+        
+        
+        
+        
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = ""
+            textField = alertTextField
+            textField.keyboardType = UIKeyboardType.numberPad
+            
+            
+        }
+        
+        alert.addAction(action)
+        
+        
+        
+        present (alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func playerTwoCemetery(_ sender: UIButton) {
+        
+        let cemeteryCows = UserDefaults.standard.integer(forKey: "TotalCowsTwo") / 2
+        self.userDefaults.set(cemeteryCows, forKey: "TotalCowsTwo")
+        print(cemeteryCows)
+        self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: "TotalCowsTwo")!) cows"
+        
     }
     
     
@@ -175,7 +260,7 @@ extension ViewController: UITextFieldDelegate{
     
     @IBAction func playerOneName(_ sender: UITextField) {
         
-        
+        print (playerTwoNameText.text!)
         
         
     }
