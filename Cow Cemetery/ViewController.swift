@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//import RealmSwift
 
 class ViewController: UIViewController {
     
@@ -26,7 +25,14 @@ class ViewController: UIViewController {
     
     let userDefaults = UserDefaults.standard
     
-    //    let realm = try! Realm()
+    
+    var cemeteryEmojis: [String] = []
+    var cemeteryEmojisTwo: [String] = []
+//    var cemeteryEmoji: [String] = UserDefaults.standard.object(forKey: "CemeteryEmoji")! as? [String] ?? []
+//    var cemeteryEmoji: [String] = UserDefaults.standard.stringArray(forKey: "CemeteryEmoji") ?? []
+    
+    
+    var cemeteryEmojiTwo: [String] = []
     
     
     
@@ -35,6 +41,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         playerOneNameText.delegate = self
         playerTwoNameText.delegate = self
+        
+//        cemeteryEmojis = UserDefaults.standard.object(forKey: "CemeteryEmoji") as? [String] ?? []
+//
+//        print("\(UserDefaults.standard.object(forKey: "CemeteryEmoji")!) after userDefaults stuff")
+//        print(cemeteryEmojis)
         
         playerOneNameText.text = userDefaults.value(forKey: "PlayerOneName") as? String ?? "Player 1"
         playerTwoNameText.text = userDefaults.value(forKey: "PlayerTwoName") as? String ?? "Player 2"
@@ -51,26 +62,32 @@ class ViewController: UIViewController {
             numberOfCowsPlayerTwo.text = "0 Cows"
         }
         
-        userDefaults.setValue(false, forKey: "AdditionalCows")
         
-        //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        if let emojis = userDefaults.array(forKey: "CemeteryEmoji") as? [String] {
+               playerOneCemeteries.text = "\(emojis.joined())"
+               cemeteryEmojis = emojis
+               print(cemeteryEmojis)
+           } else {
+               playerOneCemeteries.text = ""
+           }
+        
+        if let emojisTwo = userDefaults.array(forKey: "CemeteryEmojiTwo") as? [String] {
+               playerTwoCemeteries.text = "\(emojisTwo.joined())"
+               cemeteryEmojisTwo = emojisTwo
+               print(cemeteryEmojisTwo)
+           } else {
+               playerTwoCemeteries.text = ""
+           }
+//        if UserDefaults.standard.object(forKey: "CemeteryEmoji").debugDescription.count != 0{
+//            playerOneCemeteries.text = "\(UserDefaults.standard.object(forKey: "CemeteryEmoji")!)"
+//            print(cemeteryEmoji)
+//        }else {
+//            playerOneCemeteries.text = ""
+//        }
+    
     }
     
     
-    //    @objc func keyboardWillShow(notification: NSNotification) {
-    //        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-    //            if self.view.frame.origin.y == 0 {
-    //                self.view.frame.origin.y -= keyboardSize.height
-    //            }
-    //        }
-    //    }
-    //
-    //    @objc func keyboardWillHide(notification: NSNotification) {
-    //        if self.view.frame.origin.y != 0 {
-    //            self.view.frame.origin.y = 0
-    //        }
-    //    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -90,7 +107,7 @@ class ViewController: UIViewController {
         
         var textField = UITextField()
         
-        //        textField.reloadInputViews()
+
         
         let alert = UIAlertController(title: "Cows Spotted!", message: "How many cows did you see?", preferredStyle: .alert)
         
@@ -110,10 +127,7 @@ class ViewController: UIViewController {
                 totalCows += firstCows
                 self.userDefaults.set(totalCows, forKey: "TotalCows")
                 print(totalCows)
-                //                let totalCows = firstCows
-                //                self.userDefaults.set(0, forKey: "FirstAddition")
-                //                self.userDefaults.set(0, forKey: "SecondCows")
-                //                print(totalCows)
+            
                 self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: "FirstCows")!) cows"
             }else if self.numberOfCowsPlayerOne.text != "# of Cows"{
                 additionalCows = cowsNumber!
@@ -124,13 +138,7 @@ class ViewController: UIViewController {
                 self.userDefaults.set(totalCows, forKey: "TotalCows")
                 print(totalCows)
                 self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: "TotalCows")!) cows"
-                //                self.userDefaults.set(cowsNumber, forKey: "AdditionalCows")
-                //                let additionalCows = UserDefaults.standard.integer(forKey: "AdditionalCows")
-                //                print(additionalCows)
-                //
-                //                let totalCows = totalCows + additionalCows
-                //                print(totalCows)
-                
+                print("\(UserDefaults.standard.object(forKey: "CemeteryEmoji")!) after userDefaults stuff")
             }
         
         }
@@ -155,17 +163,44 @@ class ViewController: UIViewController {
         present (alert, animated: true, completion: nil)
         
         
+        
     }
     
     
     
-    
     @IBAction func playerOneCemetery(_ sender: UIButton) {
+        
         let cemeteryCows = UserDefaults.standard.integer(forKey: "TotalCows") / 2
         self.userDefaults.set(cemeteryCows, forKey: "TotalCows")
         print(cemeteryCows)
         self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: "TotalCows")!) cows"
         
+
+        addCemeteryEmoji()
+        
+        print(UserDefaults.standard.object(forKey: "CemeteryEmoji")!)
+        
+        func addCemeteryEmoji() {
+            cemeteryEmojis.append("🪦")
+            print(cemeteryEmojis)
+            self.playerOneCemeteries.text = "\(cemeteryEmojis.joined())"
+            userDefaults.set(cemeteryEmojis, forKey: "CemeteryEmoji")
+        }
+//        func addCemeteryEmoji() {
+//
+//            cemeteryEmojis.append("🪦")
+////            self.userDefaults.set(cemeteryEmoji, forKey: "CemeteryEmoji")
+//            print(cemeteryEmojis)
+//            self.playerOneCemeteries.text = "\(cemeteryEmojis.joined())"
+////            self.playerOneCemeteries.text = "\(UserDefaults.standard.object(forKey: "CemeteryEmoji"))"
+//
+//            userDefaults.set(cemeteryEmojis.joined(), forKey: "CemeteryEmoji")
+////            cemeteryEmoji = UserDefaults.standard.object(forKey: "CemeteryEmoji") as! [String]
+//            print(UserDefaults.standard.object(forKey: "CemeteryEmoji")!)
+//            print("\(cemeteryEmojis.joined()) after userDefaults stuff")
+//
+//
+//        }
         
     }
     
@@ -247,13 +282,36 @@ class ViewController: UIViewController {
         print(cemeteryCows)
         self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: "TotalCowsTwo")!) cows"
         
+//        cemeteryEmojiTwo.append("🪦")
+             addCemeteryEmojiTwo()
+     //        print(totalCemeteries!)
+             
+             
+        func addCemeteryEmojiTwo() {
+            cemeteryEmojisTwo.append("🪦")
+            print(cemeteryEmojisTwo)
+            self.playerTwoCemeteries.text = "\(cemeteryEmojisTwo.joined())"
+            userDefaults.set(cemeteryEmojisTwo, forKey: "CemeteryEmojiTwo")
+        }
+             
+//             func addCemeteryEmojiTwo() {
+//
+//                 cemeteryEmojiTwo.append("🪦")
+//     //            self.userDefaults.set(cemeteryEmoji, forKey: "CemeteryEmoji")
+//                 print(cemeteryEmojiTwo)
+//                 self.playerTwoCemeteries.text = "\(cemeteryEmojiTwo.joined())"
+//                 userDefaults.set(cemeteryEmojiTwo, forKey: "CemeteryEmojiTwo")
+//
+//
+                 
+                 
+             }
     }
     
+   
     
     
     
-    
-}
 
 
 extension ViewController: UITextFieldDelegate{
