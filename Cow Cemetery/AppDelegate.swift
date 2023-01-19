@@ -35,12 +35,13 @@ let userDefaults = UserDefaults()
     }
 
 //    func applicationDidEnterBackground(_ application: UIApplication) {
-//        userDefaults.synchronize()
+//        self.userDefaults.set(cowArrayOne, forKey: "PlayerOneCows")
+//        print("\(userDefaults.array(forKey: "PlayerOneCows")!) from app delegate")
 //    }
-//
+////
 //    func applicationWillTerminate(_ application: UIApplication) {
-//        print(cemeteryEmoji)
-//        userDefaults.synchronize()
+//        self.userDefaults.set(cowArrayOne, forKey: "PlayerOneCows")
+//        print("\(userDefaults.array(forKey: "PlayerOneCows")!) from app delegate")
 //    }
 
 }
