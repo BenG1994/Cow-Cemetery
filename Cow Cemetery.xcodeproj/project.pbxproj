@@ -17,6 +17,7 @@
 		2E3ED9EE2971B2A800150CF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3ED9EC2971B2A800150CF3 /* Main.storyboard */; };
 		2E3ED9F02971B2AA00150CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E3ED9EF2971B2AA00150CF3 /* Assets.xcassets */; };
 		2E3ED9F32971B2AA00150CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3ED9F12971B2AA00150CF3 /* LaunchScreen.storyboard */; };
+		2E4CDD77297B0E91006A06CC /* RulesViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4CDD76297B0E91006A06CC /* RulesViewControllers.swift */; };
 		2EB2E40529738E2200E1E0A7 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB2E40429738E2200E1E0A7 /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		2E3ED9EF2971B2AA00150CF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E3ED9F22971B2AA00150CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E3ED9F42971B2AA00150CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E4CDD76297B0E91006A06CC /* RulesViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewControllers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,17 +68,51 @@
 		2E3ED9E52971B2A800150CF3 /* Cow Cemetery */ = {
 			isa = PBXGroup;
 			children = (
-				2E3ED9E62971B2A800150CF3 /* AppDelegate.swift */,
-				2E3ED9E82971B2A800150CF3 /* SceneDelegate.swift */,
-				2E3ED9EA2971B2A800150CF3 /* ViewController.swift */,
-				2E027DC32979ED290073BE11 /* Keys.swift */,
-				2E29FF8529745BF000D44430 /* CowMath.swift */,
-				2E3ED9EC2971B2A800150CF3 /* Main.storyboard */,
+				2E4CDD75297B06CF006A06CC /* App */,
+				2E4CDD73297B06AB006A06CC /* Model */,
+				2E4CDD72297B06A0006A06CC /* Controllers */,
+				2E4CDD74297B06C1006A06CC /* Views */,
 				2E3ED9EF2971B2AA00150CF3 /* Assets.xcassets */,
 				2E3ED9F12971B2AA00150CF3 /* LaunchScreen.storyboard */,
 				2E3ED9F42971B2AA00150CF3 /* Info.plist */,
 			);
 			path = "Cow Cemetery";
+			sourceTree = "<group>";
+		};
+		2E4CDD72297B06A0006A06CC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2E3ED9EA2971B2A800150CF3 /* ViewController.swift */,
+				2E4CDD76297B0E91006A06CC /* RulesViewControllers.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2E4CDD73297B06AB006A06CC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2E027DC32979ED290073BE11 /* Keys.swift */,
+				2E29FF8529745BF000D44430 /* CowMath.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E4CDD74297B06C1006A06CC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2E3ED9EC2971B2A800150CF3 /* Main.storyboard */,
+			);
+			name = Views;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E4CDD75297B06CF006A06CC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2E3ED9E62971B2A800150CF3 /* AppDelegate.swift */,
+				2E3ED9E82971B2A800150CF3 /* SceneDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E4CDD77297B0E91006A06CC /* RulesViewControllers.swift in Sources */,
 				2E29FF8629745BF000D44430 /* CowMath.swift in Sources */,
 				2E3ED9EB2971B2A800150CF3 /* ViewController.swift in Sources */,
 				2E3ED9E72971B2A800150CF3 /* AppDelegate.swift in Sources */,
@@ -310,7 +347,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4224Q87F2F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cow Cemetery/Info.plist";
@@ -321,6 +358,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -344,7 +382,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4224Q87F2F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cow Cemetery/Info.plist";
@@ -355,6 +393,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
