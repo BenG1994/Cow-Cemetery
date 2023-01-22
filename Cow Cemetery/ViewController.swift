@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     
     let userDefaults = UserDefaults.standard
     
+    var addCowsAmount = ""
+    
     
     var cemeteryEmojis: [String] = []
     var cemeteryEmojisTwo: [String] = []
@@ -47,7 +49,8 @@ class ViewController: UIViewController {
         playerOneNameText.delegate = self
         playerTwoNameText.delegate = self
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "cow cemetery background alternate.png")!)
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "cow background dark.png")!)
         
         
         //        cemeteryEmojis = UserDefaults.standard.object(forKey: "CemeteryEmoji") as? [String] ?? []
@@ -154,19 +157,42 @@ class ViewController: UIViewController {
     @IBAction func playerOneSawCows(_ sender: UIButton) {
         
         
+        
+        
         var textField = UITextField()
+        
+//        textField.delegate = self
+//
+//
+//
+////
+//        func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+//            if textField.text != nil{
+//                return true
+//            }else {
+//                textField.text = "0"
+//                return true
+//            }
+//        }
+        
+        
         
         
         
         let alert = UIAlertController(title: "Cows Spotted!", message: "How many cows did you see?", preferredStyle: .alert)
         
+        let actionCancel = UIAlertAction(title: "False Alarm", style: .cancel)
+        
         let action = UIAlertAction(title: "Add Cows", style: .default) {(action) in
+            
+            
             
             //MARK: - first cows
             
             var totalCows = self.totalCowsOne
             var additionalCows = 0
-            let newCows = textField.text!
+            
+            let newCows = textField.text ?? "0"
             let cowsNumber = Int(newCows)
             
             var cowArrayOne: [String] = []
@@ -185,7 +211,7 @@ class ViewController: UIViewController {
                 self.userDefaults.set(cowArrayOne, forKey: "PlayerOneCows")
                 print(cowArrayOne.joined())
             }else if self.numberOfCowsPlayerOne.text != "# of Cows"{
-                additionalCows = cowsNumber!
+                additionalCows = cowsNumber ?? 0
                 print(additionalCows)
                 totalCows = UserDefaults.standard.integer(forKey: "TotalCows")
                 totalCows += additionalCows
@@ -200,15 +226,15 @@ class ViewController: UIViewController {
                 print(cowArrayOne.joined())
             }
             
+           
+            
         }
         
-        
-        
-        
-        
-        
         alert.addTextField { (alertTextField) in
+//            textField.delegate = self
+            
             alertTextField.placeholder = ""
+//            alertTextField.text = "0"
             textField = alertTextField
             textField.keyboardType = UIKeyboardType.numberPad
             
@@ -216,6 +242,8 @@ class ViewController: UIViewController {
         }
         
         alert.addAction(action)
+        alert.addAction(actionCancel)
+        
         
         
         
@@ -351,7 +379,7 @@ class ViewController: UIViewController {
         
         print(UserDefaults.standard.object(forKey: "CemeteryEmoji")!)
         
-        let alert = UIAlertController(title: "Cemetery!", message: "You're opponent spooted a cemetery on your side. Half your cows have died.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Cemetery!", message: "Your opponent spotted a cemetery on your side. Half your cows have died.", preferredStyle: .alert)
         present (alert, animated: true, completion: nil)
         let when = DispatchTime.now() + 2.5
         DispatchQueue.main.asyncAfter(deadline: when){
@@ -393,13 +421,15 @@ class ViewController: UIViewController {
         
         let alert = UIAlertController(title: "Cows Spotted!", message: "How many cows did you see?", preferredStyle: .alert)
         
+        let actionCancel = UIAlertAction(title: "False Alarm", style: .cancel)
+        
         let action = UIAlertAction(title: "Add Cows", style: .default) {(action) in
             
             //MARK: - first cows
             
             var totalCows = self.totalCowsTwo
             var additionalCows = 0
-            let newCows = textField.text!
+            let newCows = textField.text ?? "0"
             let cowsNumber = Int(newCows)
             
             if self.numberOfCowsPlayerTwo.text == "0 cows"{
@@ -417,7 +447,7 @@ class ViewController: UIViewController {
                 self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: "FirstCowsTwo")!) cows"
                 self.addCowEmojiTwo()
             }else if self.numberOfCowsPlayerTwo.text != "# of Cows"{
-                additionalCows = cowsNumber!
+                additionalCows = cowsNumber ?? 0
                 print("\(additionalCows) additional cows")
                 totalCows = UserDefaults.standard.integer(forKey: "TotalCowsTwo")
                 totalCows += additionalCows
@@ -442,10 +472,10 @@ class ViewController: UIViewController {
             textField = alertTextField
             textField.keyboardType = UIKeyboardType.numberPad
             
-            
         }
         
         alert.addAction(action)
+        alert.addAction(actionCancel)
         
         
         
@@ -631,6 +661,14 @@ class ViewController: UIViewController {
         addCowEmojiTwo()
         //        print(totalCemeteries!)
         
+        let alert = UIAlertController(title: "Cemetery!", message: "Your opponent spotted a cemetery on your side. Half your cows have died.", preferredStyle: .alert)
+        present (alert, animated: true, completion: nil)
+        let when = DispatchTime.now() + 2.5
+        DispatchQueue.main.asyncAfter(deadline: when){
+          // your code with delay
+          alert.dismiss(animated: true, completion: nil)
+        }
+        
         
         func addCemeteryEmojiTwo() {
             cemeteryEmojisTwo.append("🪦")
@@ -717,7 +755,14 @@ extension ViewController: UITextFieldDelegate{
     }
     
     
-    
+//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+//        if textField.text != nil{
+//            return true
+//        }else {
+//            textField.placeholder = "Did you see cows?"
+//            return false
+//        }
+//    }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         let newPlayerOneName = playerOneNameText.text
@@ -744,10 +789,25 @@ extension ViewController: UITextFieldDelegate{
         }else {
             print("No players")
         }
+        
+//        if textField.text == "0"{
+//            textField.text = ""
+//        }else{
+//            textField.text = "0"
+//        }
+    
+        
     }
     
     
     
-    
+//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+//        if textField.text == "0"{
+//            return true
+//        }else{
+//            textField.text = "0"
+//            return false
+//        }
+//    }
     
 }
