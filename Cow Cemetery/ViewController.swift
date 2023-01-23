@@ -50,6 +50,23 @@ class ViewController: UIViewController {
         playerTwoNameText.delegate = self
         
         
+        // Get main screen bounds
+//        let screenSize: CGRect = UIScreen.main.bounds
+//
+//        let screenWidth = screenSize.width
+//        let screenHeight = screenSize.height
+//
+//        print("Screen width = \(screenWidth), screen height = \(screenHeight)")
+//
+//        if screenHeight <= 700.0 {
+//            self.playerOneCows.frame.size.height = 140
+//            self.playerTwoCows.frame.size.height =  self.playerOneCows.frame.size.height
+//            print(self.playerOneCows.frame.size.height)
+//            print(self.playerTwoCows.frame.size.height)
+//            print("twat")
+//        }
+        
+        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "cow background dark.png")!)
         
         
@@ -139,7 +156,6 @@ class ViewController: UIViewController {
     }
     
     
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
@@ -195,7 +211,7 @@ class ViewController: UIViewController {
             let newCows = textField.text ?? "0"
             let cowsNumber = Int(newCows)
             
-            var cowArrayOne: [String] = []
+            let cowArrayOne: [String] = []
             
             if self.numberOfCowsPlayerOne.text == "0 cows"{
                 self.userDefaults.set(cowsNumber, forKey: "FirstCows")
@@ -257,7 +273,7 @@ class ViewController: UIViewController {
         
         //            print(UserDefaults.standard.integer(forKey: "TotalCowsTwo"))
         //            let totalCows = self.totalCowsTwo
-        let totalCows = UserDefaults.standard.integer(forKey: "TotalCows")
+        _ = UserDefaults.standard.integer(forKey: "TotalCows")
         //
         
         //        if UserDefaults.standard.integer(forKey: "TotalCowsTwo") 1...9 {
@@ -337,12 +353,12 @@ class ViewController: UIViewController {
     func cowsAboveNineP1() {
         let totalCows = UserDefaults.standard.integer(forKey: "TotalCows")
         let totalCowsDivided = totalCows / 10
-        let cowDivide = 1
+//        let cowDivide = 1
         var cowArrayOne: [String] = []
         let cow = "🐄"
         print("\(totalCowsDivided) from else if cows")
         print("\(cow) from else if cows")
-        for cowDivide in 1...totalCowsDivided {
+        for _ in 1...totalCowsDivided {
             print(cow)
             cowArrayOne.append(cow)
             print(cowArrayOne.joined())
@@ -491,7 +507,7 @@ class ViewController: UIViewController {
     func addCowEmojiTwo() {
         //            print(UserDefaults.standard.integer(forKey: "TotalCowsTwo"))
         //            let totalCows = self.totalCowsTwo
-        let totalCows = UserDefaults.standard.integer(forKey: "TotalCowsTwo")
+        _ = UserDefaults.standard.integer(forKey: "TotalCowsTwo")
         //
         //
         
@@ -592,12 +608,12 @@ class ViewController: UIViewController {
     func cowsAboveNineP2() {
         let totalCows = UserDefaults.standard.integer(forKey: "TotalCowsTwo")
         let totalCowsDivided = totalCows / 10
-        let cowDivide = 1
+//        let cowDivide = 1
         var cowArrayTwo: [String] = []
         let cow = "🐄"
         print("\(totalCowsDivided) from else if cows")
         print("\(cow) from else if cows")
-        for cowDivide in 1...totalCowsDivided {
+        for _ in 1...totalCowsDivided {
             print(cow)
             cowArrayTwo.append(cow)
             print(cowArrayTwo.joined())
