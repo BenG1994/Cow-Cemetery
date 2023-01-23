@@ -19,102 +19,59 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerOneCemeteries: UILabel!
     @IBOutlet weak var playerTwoCemeteries: UILabel!
     
-    
-    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
     let userDefaults = UserDefaults.standard
-    
-    var addCowsAmount = ""
-    
-    
+        
     var cemeteryEmojis: [String] = []
     var cemeteryEmojisTwo: [String] = []
-    //    var cemeteryEmoji: [String] = UserDefaults.standard.object(forKey: "CemeteryEmoji")! as? [String] ?? []
-    //    var cemeteryEmoji: [String] = UserDefaults.standard.stringArray(forKey: "CemeteryEmoji") ?? []
-    
-    
-    var cemeteryEmojiTwo: [String] = []
-    
     var cowEmojis: [String] = []
     var cowEmojisTwo: [String] = []
-    var totalCowsOne = UserDefaults.standard.integer(forKey: "TotalCows")
-    var totalCowsTwo = UserDefaults.standard.integer(forKey: "TotalCowsTwo")
+    var totalCowsOne = UserDefaults.standard.integer(forKey: K.totalCowsOne)
+    var totalCowsTwo = UserDefaults.standard.integer(forKey: K.totalCowsTwo)
     
-    
+    //MARK: - Loading User Defaults
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         playerOneNameText.delegate = self
         playerTwoNameText.delegate = self
-        
-        
-        // Get main screen bounds
-//        let screenSize: CGRect = UIScreen.main.bounds
-//
-//        let screenWidth = screenSize.width
-//        let screenHeight = screenSize.height
-//
-//        print("Screen width = \(screenWidth), screen height = \(screenHeight)")
-//
-//        if screenHeight <= 700.0 {
-//            self.playerOneCows.frame.size.height = 140
-//            self.playerTwoCows.frame.size.height =  self.playerOneCows.frame.size.height
-//            print(self.playerOneCows.frame.size.height)
-//            print(self.playerTwoCows.frame.size.height)
-//            print("twat")
-//        }
-        
-        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "cow background dark.png")!)
-        
-        
-        //        cemeteryEmojis = UserDefaults.standard.object(forKey: "CemeteryEmoji") as? [String] ?? []
-        //
-        //        print("\(UserDefaults.standard.object(forKey: "CemeteryEmoji")!) after userDefaults stuff")
-        //        print(cemeteryEmojis)
-        
         playerOneNameText.text = userDefaults.value(forKey: "PlayerOneName") as? String ?? "Player 1"
         playerTwoNameText.text = userDefaults.value(forKey: "PlayerTwoName") as? String ?? "Player 2"
-        
-        if userDefaults.value(forKey: "TotalCows") != nil {
-            numberOfCowsPlayerOne.text = "\(UserDefaults.standard.integer(forKey: "TotalCows")) cows"
+
+        if userDefaults.value(forKey: K.totalCowsOne) != nil {
+            numberOfCowsPlayerOne.text = "\(UserDefaults.standard.integer(forKey: K.totalCowsOne)) cows"
         }else {
             numberOfCowsPlayerOne.text = "0 Cows"
         }
-        
-        if userDefaults.value(forKey: "TotalCowsTwo") != nil {
-            numberOfCowsPlayerTwo.text = "\(UserDefaults.standard.integer(forKey: "TotalCowsTwo")) cows"
+
+        if userDefaults.value(forKey: K.totalCowsTwo) != nil {
+            numberOfCowsPlayerTwo.text = "\(UserDefaults.standard.integer(forKey: K.totalCowsTwo)) cows"
         }else {
             numberOfCowsPlayerTwo.text = "0 Cows"
         }
         
-        
-        if let emojis = userDefaults.array(forKey: "CemeteryEmoji") as? [String] {
+        if let emojis = userDefaults.array(forKey: K.cemeteryEmojiOne) as? [String] {
             playerOneCemeteries.text = "\(emojis.joined())"
             cemeteryEmojis = emojis
             print(cemeteryEmojis)
         } else {
             playerOneCemeteries.text = ""
         }
-        
-        if let emojisTwo = userDefaults.array(forKey: "CemeteryEmojiTwo") as? [String] {
+
+        if let emojisTwo = userDefaults.array(forKey: K.cemeteryEmojiTwo) as? [String] {
             playerTwoCemeteries.text = "\(emojisTwo.joined())"
             cemeteryEmojisTwo = emojisTwo
             print(cemeteryEmojisTwo)
         } else {
             playerTwoCemeteries.text = ""
         }
-        
-        //chance PlayerOneCow key for either less than nine or more than. I think they compete when saving user defaults then when adding...
-        
-        
-        if userDefaults.string(forKey: "PlayerOneCowsText") != nil{
-            print("\(userDefaults.string(forKey: "PlayerOneCowsText")!)")
-            playerOneCows.text = "\(userDefaults.string(forKey: "PlayerOneCowsText")!)"
-        }else if userDefaults.array(forKey: "PlayerOneCows") as? [String] != nil{
-            if let cowDisplayEmojis = userDefaults.array(forKey: "PlayerOneCows") as? [String] {
+
+        if userDefaults.string(forKey: K.playerOneCowText) != nil{
+            print("\(userDefaults.string(forKey: K.playerOneCowText)!)")
+            playerOneCows.text = "\(userDefaults.string(forKey: K.playerOneCowText)!)"
+        }else if userDefaults.array(forKey: K.cowsOne) as? [String] != nil{
+            if let cowDisplayEmojis = userDefaults.array(forKey: K.cowsOne) as? [String] {
                 playerOneCows.text = "\(cowDisplayEmojis.joined())"
                 cowEmojis = cowDisplayEmojis
                 print(cowEmojis)
@@ -122,12 +79,12 @@ class ViewController: UIViewController {
         }else {
             playerOneCows.text = ""
         }
-        
-        if userDefaults.string(forKey: "PlayerTwoCowsText") != nil{
-            print("\(userDefaults.string(forKey: "PlayerTwoCowsText")!)")
-            playerTwoCows.text = "\(userDefaults.string(forKey: "PlayerTwoCowsText")!)"
-        }else if userDefaults.array(forKey: "PlayerTwoCows") as? [String] != nil{
-            if let cowDisplayEmojisTwo = userDefaults.array(forKey: "PlayerTwoCows") as? [String] {
+
+        if userDefaults.string(forKey: K.playerTwoCowText) != nil{
+            print("\(userDefaults.string(forKey: K.playerTwoCowText)!)")
+            playerTwoCows.text = "\(userDefaults.string(forKey: K.playerTwoCowText)!)"
+        }else if userDefaults.array(forKey: K.cowsTwo) as? [String] != nil{
+            if let cowDisplayEmojisTwo = userDefaults.array(forKey: K.cowsTwo) as? [String] {
                 playerTwoCows.text = "\(cowDisplayEmojisTwo.joined())"
                 cowEmojisTwo = cowDisplayEmojisTwo
                 print(cowEmojisTwo)
@@ -135,194 +92,81 @@ class ViewController: UIViewController {
         }else {
             playerTwoCows.text = ""
         }
-        
-        
-        
-        //        if let cowDisplayEmojis = userDefaults.array(forKey: "PlayerOneCows") as? [String] {
-        //            playerOneCows.text = "\(cowDisplayEmojis.joined())"
-        //            cowEmojis = cowDisplayEmojis
-        //            print(cowEmojis)
-        //        } else {
-        //            playerOneCows.text = ""
-        //        }
-        
-        //        if UserDefaults.standard.object(forKey: "CemeteryEmoji").debugDescription.count != 0{
-        //            playerOneCemeteries.text = "\(UserDefaults.standard.object(forKey: "CemeteryEmoji")!)"
-        //            print(cemeteryEmoji)
-        //        }else {
-        //            playerOneCemeteries.text = ""
-        //        }
-        
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
-    
-    
-    
+
     @IBAction func donePressed(_ segue: UIStoryboardSegue) {
     }
     
-    
-    
-    
+    //MARK: - Player One Cows
     
     @IBAction func playerOneSawCows(_ sender: UIButton) {
-        
-        
-        
-        
+    
         var textField = UITextField()
-        
-//        textField.delegate = self
-//
-//
-//
-////
-//        func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-//            if textField.text != nil{
-//                return true
-//            }else {
-//                textField.text = "0"
-//                return true
-//            }
-//        }
-        
-        
-        
-        
-        
+    
         let alert = UIAlertController(title: "Cows Spotted!", message: "How many cows did you see?", preferredStyle: .alert)
-        
         let actionCancel = UIAlertAction(title: "False Alarm", style: .cancel)
-        
         let action = UIAlertAction(title: "Add Cows", style: .default) {(action) in
-            
-            
-            
-            //MARK: - first cows
             
             var totalCows = self.totalCowsOne
             var additionalCows = 0
-            
             let newCows = textField.text ?? "0"
             let cowsNumber = Int(newCows)
-            
             let cowArrayOne: [String] = []
             
             if self.numberOfCowsPlayerOne.text == "0 cows"{
-                self.userDefaults.set(cowsNumber, forKey: "FirstCows")
-                let firstCows = UserDefaults.standard.integer(forKey: "FirstCows")
+                self.userDefaults.set(cowsNumber, forKey: K.firstCowsOne)
+                let firstCows = UserDefaults.standard.integer(forKey: K.firstCowsOne)
                 print(firstCows)
                 totalCows += firstCows
-                self.userDefaults.set(totalCows, forKey: "TotalCows")
+                self.userDefaults.set(totalCows, forKey: K.totalCowsOne)
                 print(totalCows)
-                
-                self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: "FirstCows")!) cows"
-                
+                self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: K.firstCowsOne)!) cows"
                 self.addCowEmojiOne()
-                self.userDefaults.set(cowArrayOne, forKey: "PlayerOneCows")
+                self.userDefaults.set(cowArrayOne, forKey: K.cowsOne)
                 print(cowArrayOne.joined())
             }else if self.numberOfCowsPlayerOne.text != "# of Cows"{
                 additionalCows = cowsNumber ?? 0
                 print(additionalCows)
-                totalCows = UserDefaults.standard.integer(forKey: "TotalCows")
+                totalCows = UserDefaults.standard.integer(forKey: K.totalCowsOne)
                 totalCows += additionalCows
                 print(totalCows)
-                self.userDefaults.set(totalCows, forKey: "TotalCows")
+                self.userDefaults.set(totalCows, forKey: K.totalCowsOne)
                 print(totalCows)
-                self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: "TotalCows")!) cows"
-                //                print("\(UserDefaults.standard.object(forKey: "CemeteryEmoji")!) after userDefaults stuff")
+                self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: K.totalCowsOne)!) cows"
                 self.addCowEmojiOne()
-                self.userDefaults.set(cowArrayOne, forKey: "PlayerOneCows")
-                //                    print("\(self.userDefaults.string(forKey: "PlayerOneCowsText")!) player one text")
+                self.userDefaults.set(cowArrayOne, forKey: K.cowsOne)
                 print(cowArrayOne.joined())
             }
-            
-           
-            
         }
         
         alert.addTextField { (alertTextField) in
-//            textField.delegate = self
-            
             alertTextField.placeholder = ""
-//            alertTextField.text = "0"
             textField = alertTextField
             textField.keyboardType = UIKeyboardType.numberPad
-            
-            
         }
         
         alert.addAction(action)
         alert.addAction(actionCancel)
-        
-        
-        
-        
+
         present (alert, animated: true, completion: nil)
-        
-        
-        
     }
     
     func addCowEmojiOne() {
         
-        //            print(UserDefaults.standard.integer(forKey: "TotalCowsTwo"))
-        //            let totalCows = self.totalCowsTwo
-        _ = UserDefaults.standard.integer(forKey: "TotalCows")
-        //
-        
-        //        if UserDefaults.standard.integer(forKey: "TotalCowsTwo") 1...9 {
-        //            print("\(totalCows) before switch")
-        
+        _ = UserDefaults.standard.integer(forKey: K.totalCowsOne)
         cowsBetweenZeroAndNine()
-        
-        userDefaults.set(self.playerOneCows.text, forKey: "PlayerOneCowsText")
-        
-        print(userDefaults.string(forKey: "PlayerOneCowsText")!)
-        
-        //        smallCowSwitchOne()
-        
-        //        switch UserDefaults.standard.integer(forKey: "TotalCows"){
-        //        case 0:
-        //            return zeroCowsP1()
-        //        case 1:
-        //            return self.playerOneCows.text = "🐮"
-        //        case 2:
-        //            return self.playerOneCows.text = "🐮🐮"
-        //        case 3:
-        //            return self.playerOneCows.text = "🐮🐮🐮"
-        //        case 4:
-        //            return self.playerOneCows.text = "🐮🐮🐮🐮"
-        //        case 5:
-        //            return self.playerOneCows.text = "🐮🐮🐮🐮🐮"
-        //        case 6:
-        //            return self.playerOneCows.text = "🐮🐮🐮🐮🐮🐮"
-        //        case 7:
-        //            return self.playerOneCows.text = "🐮🐮🐮🐮🐮🐮🐮"
-        //        case 8:
-        //            return self.playerOneCows.text = "🐮🐮🐮🐮🐮🐮🐮🐮"
-        //        case 9:
-        //            return self.playerOneCows.text = "🐮🐮🐮🐮🐮🐮🐮🐮🐮"
-        //        case 10...:
-        //            return cowsAboveNineP1()
-        //        default:
-        //            return zeroCowsP1()
-        //
-        //
-        //        }
-        
-        
-        
+        userDefaults.set(self.playerOneCows.text, forKey: K.playerOneCowText)
+        print(userDefaults.string(forKey: K.playerOneCowText)!)
     }
     
     func cowsBetweenZeroAndNine() {
         
-        switch UserDefaults.standard.integer(forKey: "TotalCows"){
+        switch UserDefaults.standard.integer(forKey: K.totalCowsOne){
         case 0:
             return zeroCowsP1()
         case 1:
@@ -351,9 +195,8 @@ class ViewController: UIViewController {
     }
     
     func cowsAboveNineP1() {
-        let totalCows = UserDefaults.standard.integer(forKey: "TotalCows")
+        let totalCows = UserDefaults.standard.integer(forKey: K.totalCowsOne)
         let totalCowsDivided = totalCows / 10
-//        let cowDivide = 1
         var cowArrayOne: [String] = []
         let cow = "🐄"
         print("\(totalCowsDivided) from else if cows")
@@ -363,37 +206,29 @@ class ViewController: UIViewController {
             cowArrayOne.append(cow)
             print(cowArrayOne.joined())
             self.playerOneCows.text = cowArrayOne.joined()
-            self.userDefaults.set(cowArrayOne, forKey: "PlayerOneCows")
-            print("\(userDefaults.array(forKey: "PlayerOneCows")!) cow array one cows")
+            self.userDefaults.set(cowArrayOne, forKey: K.cowsOne)
+            print("\(userDefaults.array(forKey: K.cowsOne)!) cow array one cows")
         }
     }
     
-    //    func cowsBetweenZeroAndNine() {
-    //        self.userDefaults.set(totalCowsOne, forKey: "PlayerOneCows")
-    //        print(totalCowsOne)
-    //    }
-    
     func zeroCowsP1() {
-        userDefaults.set(0, forKey: "TotalCows")
-        userDefaults.set(0, forKey: "FirstCows")
+        userDefaults.set(0, forKey: K.totalCowsOne)
+        userDefaults.set(0, forKey: K.firstCowsOne)
         self.playerOneCows.text = ""
-        print(UserDefaults.standard.integer(forKey: "TotalCows"))
+        print(UserDefaults.standard.integer(forKey: K.totalCowsOne))
     }
-    
-    
     
     @IBAction func playerOneCemetery(_ sender: UIButton) {
         
-        let cemeteryCows = UserDefaults.standard.integer(forKey: "TotalCows") / 2
-        self.userDefaults.set(cemeteryCows, forKey: "TotalCows")
+        let cemeteryCows = UserDefaults.standard.integer(forKey: K.totalCowsOne) / 2
+        self.userDefaults.set(cemeteryCows, forKey: K.totalCowsOne)
         print("\(cemeteryCows) start off cemetery func")
-        self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: "TotalCows")!) cows"
-        
+        self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: K.totalCowsOne)!) cows"
         
         addCemeteryEmoji()
         addCowEmojiOne()
         
-        print(UserDefaults.standard.object(forKey: "CemeteryEmoji")!)
+        print(UserDefaults.standard.object(forKey: K.cemeteryEmojiOne)!)
         
         let alert = UIAlertController(title: "Cemetery!", message: "Your opponent spotted a cemetery on your side. Half your cows have died.", preferredStyle: .alert)
         present (alert, animated: true, completion: nil)
@@ -403,45 +238,23 @@ class ViewController: UIViewController {
           alert.dismiss(animated: true, completion: nil)
         }
             
-        
         func addCemeteryEmoji() {
             cemeteryEmojis.append("🪦")
             print(cemeteryEmojis)
             self.playerOneCemeteries.text = "\(cemeteryEmojis.joined())"
-            userDefaults.set(cemeteryEmojis, forKey: "CemeteryEmoji")
+            userDefaults.set(cemeteryEmojis, forKey: K.cemeteryEmojiOne)
         }
-        //        func addCemeteryEmoji() {
-        //
-        //            cemeteryEmojis.append("🪦")
-        ////            self.userDefaults.set(cemeteryEmoji, forKey: "CemeteryEmoji")
-        //            print(cemeteryEmojis)
-        //            self.playerOneCemeteries.text = "\(cemeteryEmojis.joined())"
-        ////            self.playerOneCemeteries.text = "\(UserDefaults.standard.object(forKey: "CemeteryEmoji"))"
-        //
-        //            userDefaults.set(cemeteryEmojis.joined(), forKey: "CemeteryEmoji")
-        ////            cemeteryEmoji = UserDefaults.standard.object(forKey: "CemeteryEmoji") as! [String]
-        //            print(UserDefaults.standard.object(forKey: "CemeteryEmoji")!)
-        //            print("\(cemeteryEmojis.joined()) after userDefaults stuff")
-        //
-        //
-        //        }
-        
     }
     
+    //MARK: - Player Two Cows
     
     @IBAction func playerTwoSawCows(_ sender: UIButton) {
         
         var textField = UITextField()
         
-        //        textField.reloadInputViews()
-        
         let alert = UIAlertController(title: "Cows Spotted!", message: "How many cows did you see?", preferredStyle: .alert)
-        
         let actionCancel = UIAlertAction(title: "False Alarm", style: .cancel)
-        
         let action = UIAlertAction(title: "Add Cows", style: .default) {(action) in
-            
-            //MARK: - first cows
             
             var totalCows = self.totalCowsTwo
             var additionalCows = 0
@@ -449,135 +262,51 @@ class ViewController: UIViewController {
             let cowsNumber = Int(newCows)
             
             if self.numberOfCowsPlayerTwo.text == "0 cows"{
-                self.userDefaults.set(cowsNumber, forKey: "FirstCowsTwo")
-                let firstCows = UserDefaults.standard.integer(forKey: "FirstCowsTwo")
+                self.userDefaults.set(cowsNumber, forKey: K.firstCowsTwo)
+                let firstCows = UserDefaults.standard.integer(forKey: K.firstCowsTwo)
                 print("\(firstCows) first cows spotted")
                 print("\(totalCows) might be the problem")
                 totalCows += firstCows
-                self.userDefaults.set(totalCows, forKey: "TotalCowsTwo")
+                self.userDefaults.set(totalCows, forKey: K.totalCowsTwo)
                 print("\(totalCows) first cows user default set")
-                //                let totalCows = firstCows
-                //                self.userDefaults.set(0, forKey: "FirstAddition")
-                //                self.userDefaults.set(0, forKey: "SecondCows")
-                //                print(totalCows)
-                self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: "FirstCowsTwo")!) cows"
+                self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: K.firstCowsTwo)!) cows"
                 self.addCowEmojiTwo()
             }else if self.numberOfCowsPlayerTwo.text != "# of Cows"{
                 additionalCows = cowsNumber ?? 0
                 print("\(additionalCows) additional cows")
-                totalCows = UserDefaults.standard.integer(forKey: "TotalCowsTwo")
+                totalCows = UserDefaults.standard.integer(forKey: K.totalCowsTwo)
                 totalCows += additionalCows
                 print("\(totalCows) total cows after seeing more")
-                self.userDefaults.set(totalCows, forKey: "TotalCowsTwo")
+                self.userDefaults.set(totalCows, forKey: K.totalCowsTwo)
                 print("\(totalCows) after user defaults set")
-                self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: "TotalCowsTwo")!) cows"
-                
+                self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: K.totalCowsTwo)!) cows"
                 self.addCowEmojiTwo()
-                
             }
-            
         }
-        
-        
-        
-        
-        
-        
+
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = ""
             textField = alertTextField
             textField.keyboardType = UIKeyboardType.numberPad
-            
         }
         
         alert.addAction(action)
         alert.addAction(actionCancel)
         
-        
-        
         present (alert, animated: true, completion: nil)
-        
-        
-        
-        
-        
-        
     }
     
     func addCowEmojiTwo() {
-        //            print(UserDefaults.standard.integer(forKey: "TotalCowsTwo"))
-        //            let totalCows = self.totalCowsTwo
-        _ = UserDefaults.standard.integer(forKey: "TotalCowsTwo")
-        //
-        //
-        
-        //        if UserDefaults.standard.integer(forKey: "TotalCowsTwo") 1...9 {
-        //            print("\(totalCows) before switch")
-        
+
+        _ = UserDefaults.standard.integer(forKey: K.totalCowsTwo)
         cowsBetweenZeroAndNineTwo()
-        
-        userDefaults.set(self.playerTwoCows.text, forKey: "PlayerTwoCowsText")
-        
-        print(userDefaults.string(forKey: "PlayerTwoCowsText")!)
-        
-        //        if UserDefaults.standard.integer(forKey: "TotalCowsTwo") 1...9 {
-        //            print("\(totalCows) before switch")
-        //            switch UserDefaults.standard.integer(forKey: "TotalCowsTwo"){
-        //            case 0:
-        //                return zeroCowsP2()
-        //            case 1:
-        //                return self.playerTwoCows.text = "🐮"
-        //            case 2:
-        //                return self.playerTwoCows.text = "🐮🐮"
-        //            case 3:
-        //                return self.playerTwoCows.text = "🐮🐮🐮"
-        //                //                                return print("\(totalCows) case 3")
-        //            case 4:
-        //                return self.playerTwoCows.text = "🐮🐮🐮🐮"
-        //            case 5:
-        //                return self.playerTwoCows.text = "🐮🐮🐮🐮🐮"
-        //            case 6:
-        //                return self.playerTwoCows.text = "🐮🐮🐮🐮🐮🐮"
-        //            case 7:
-        //                return self.playerTwoCows.text = "🐮🐮🐮🐮🐮🐮🐮"
-        //            case 8:
-        //                return self.playerTwoCows.text = "🐮🐮🐮🐮🐮🐮🐮🐮"
-        //            case 9:
-        //                return self.playerTwoCows.text = "🐮🐮🐮🐮🐮🐮🐮🐮🐮"
-        //            case 10...:
-        //                return cowsAboveNineP2()
-        //            default:
-        //                return zeroCowsP2()
-        //
-        //
-        //            }
-        
-        
-        //        }else if totalCows > 9{
-        //            let totalCowsDivided = totalCows / 10
-        //            let cowDivide = 1
-        //            var cowArray: [String] = []
-        //            let cow = "🐄"
-        //            print("\(totalCowsDivided) from else if cows")
-        //            print("\(cow) from else if cows")
-        //            for cowDivide in 1...totalCowsDivided {
-        //                print(cow)
-        //                cowArray.append(cow)
-        //                print(cowArray.joined())
-        //                self.playerTwoCows.text = cowArray.joined()
-        //                self.userDefaults.set(cowArray, forKey: "PlayerTwoCows")
-        //            }
-        //        }else if totalCows == 0{
-        //            userDefaults.set(0, forKey: "TotalCowsTwo")
-        //            print(UserDefaults.standard.integer(forKey: "TotalCowsTwo"))
-        //        }
-        //
-        
+        userDefaults.set(self.playerTwoCows.text, forKey: K.playerTwoCowText)
+        print(userDefaults.string(forKey: K.playerTwoCowText)!)
     }
     
     func cowsBetweenZeroAndNineTwo() {
         
-        switch UserDefaults.standard.integer(forKey: "TotalCowsTwo"){
+        switch UserDefaults.standard.integer(forKey: K.totalCowsTwo){
         case 0:
             return zeroCowsP2()
         case 1:
@@ -606,9 +335,8 @@ class ViewController: UIViewController {
     }
     
     func cowsAboveNineP2() {
-        let totalCows = UserDefaults.standard.integer(forKey: "TotalCowsTwo")
+        let totalCows = UserDefaults.standard.integer(forKey: K.totalCowsTwo)
         let totalCowsDivided = totalCows / 10
-//        let cowDivide = 1
         var cowArrayTwo: [String] = []
         let cow = "🐄"
         print("\(totalCowsDivided) from else if cows")
@@ -618,168 +346,91 @@ class ViewController: UIViewController {
             cowArrayTwo.append(cow)
             print(cowArrayTwo.joined())
             self.playerTwoCows.text = cowArrayTwo.joined()
-            self.userDefaults.set(cowArrayTwo, forKey: "PlayerTwoCows")
-            print("\(userDefaults.array(forKey: "PlayerTwoCows")!) cow array one cows")
+            self.userDefaults.set(cowArrayTwo, forKey: K.cowsTwo)
+            print("\(userDefaults.array(forKey: K.cowsTwo)!) cow array one cows")
         }
     }
-    
-    //    func cowsBetweenZeroAndNine() {
-    //        self.userDefaults.set(totalCowsOne, forKey: "PlayerOneCows")
-    //        print(totalCowsOne)
-    //    }
-    
+
     func zeroCowsP2() {
-        userDefaults.set(0, forKey: "TotalCowsTwo")
-        userDefaults.set(0, forKey: "FirstCowsTwo")
+        userDefaults.set(0, forKey: K.totalCowsTwo)
+        userDefaults.set(0, forKey: K.firstCowsTwo)
         self.playerTwoCows.text = ""
-        print(UserDefaults.standard.integer(forKey: "TotalCowsTwo"))
+        print(UserDefaults.standard.integer(forKey: K.totalCowsTwo))
     }
-    
-    
-    //        func cowsAboveNine() {
-    //            let totalCows = UserDefaults.standard.integer(forKey: "TotalCows")
-    //            let totalCowsDivided = totalCows / 10
-    //            let cowDivide = 1
-    //            var cowArray: [String] = []
-    //            let cow = "🐄"
-    //            print("\(totalCowsDivided) from else if cows")
-    //            print("\(cow) from else if cows")
-    //            for cowDivide in 1...totalCowsDivided {
-    //                print(cow)
-    //                cowArray.append(cow)
-    //                print(cowArray.joined())
-    //                self.playerTwoCows.text = cowArray.joined()
-    //                self.userDefaults.set(cowArray, forKey: "PlayerOneCows")
-    //            }
-    //        }
-    //
-    //        func zeroCows() {
-    //            userDefaults.set(0, forKey: "TotalCows")
-    //            userDefaults.set(0, forKey: "FirstCows")
-    //            self.playerTwoCows.text = ""
-    //            print(UserDefaults.standard.integer(forKey: "TotalCows"))
-    //        }
-    //
-    //        func oneCow (){
-    //
-    //        }
-    
     
     @IBAction func playerTwoCemetery(_ sender: UIButton) {
         
-        let cemeteryCows = UserDefaults.standard.integer(forKey: "TotalCowsTwo") / 2
-        self.userDefaults.set(cemeteryCows, forKey: "TotalCowsTwo")
+        let cemeteryCows = UserDefaults.standard.integer(forKey: K.totalCowsTwo) / 2
+        self.userDefaults.set(cemeteryCows, forKey: K.totalCowsTwo)
         print("\(cemeteryCows) start off cemetery func")
-        self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: "TotalCowsTwo")!) cows"
-        
-        //        cemeteryEmojiTwo.append("🪦")
+        self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: K.totalCowsTwo)!) cows"
+    
         addCemeteryEmojiTwo()
         addCowEmojiTwo()
-        //        print(totalCemeteries!)
-        
+
         let alert = UIAlertController(title: "Cemetery!", message: "Your opponent spotted a cemetery on your side. Half your cows have died.", preferredStyle: .alert)
         present (alert, animated: true, completion: nil)
         let when = DispatchTime.now() + 2.5
         DispatchQueue.main.asyncAfter(deadline: when){
-          // your code with delay
           alert.dismiss(animated: true, completion: nil)
         }
-        
         
         func addCemeteryEmojiTwo() {
             cemeteryEmojisTwo.append("🪦")
             print(cemeteryEmojisTwo)
             self.playerTwoCemeteries.text = "\(cemeteryEmojisTwo.joined())"
-            userDefaults.set(cemeteryEmojisTwo, forKey: "CemeteryEmojiTwo")
+            userDefaults.set(cemeteryEmojisTwo, forKey: K.cemeteryEmojiTwo)
         }
-        
-        //             func addCemeteryEmojiTwo() {
-        //
-        //                 cemeteryEmojiTwo.append("🪦")
-        //     //            self.userDefaults.set(cemeteryEmoji, forKey: "CemeteryEmoji")
-        //                 print(cemeteryEmojiTwo)
-        //                 self.playerTwoCemeteries.text = "\(cemeteryEmojiTwo.joined())"
-        //                 userDefaults.set(cemeteryEmojiTwo, forKey: "CemeteryEmojiTwo")
-        //
-        //
-        
-        
     }
     
+    //MARK: - New Game
     
     @IBAction func newGamePressed(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Congratulations", message: "You've reached the end of the game. Start a new one?", preferredStyle: .alert)
-        
         let actionStart = UIAlertAction(title: "Start", style: .destructive) {(action) in
             
-            
-            self.userDefaults.set(0, forKey: "TotalCows")
-            self.userDefaults.set(0, forKey: "TotalCowsTwo")
-            self.userDefaults.set([], forKey: "CemeteryEmoji")
-            self.userDefaults.set([], forKey: "CemeteryEmojiTwo")
-            self.userDefaults.set(0, forKey: "FirstCows")
-            self.userDefaults.set(0, forKey: "FirstCowsTwo")
+            self.userDefaults.set(0, forKey: K.totalCowsOne)
+            self.userDefaults.set(0, forKey: K.totalCowsTwo)
+            self.userDefaults.set([], forKey: K.cemeteryEmojiOne)
+            self.userDefaults.set([], forKey: K.cemeteryEmojiTwo)
+            self.userDefaults.set(0, forKey: K.firstCowsOne)
+            self.userDefaults.set(0, forKey: K.firstCowsTwo)
             self.playerTwoCows.text = ""
             self.playerOneCows.text = ""
             self.numberOfCowsPlayerOne.text = "# of cows"
             self.numberOfCowsPlayerTwo.text = "# of cows"
             self.playerOneCemeteries.text = ""
             self.playerTwoCemeteries.text = ""
-            
-            
         }
         
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addAction(actionStart)
         alert.addAction(actionCancel)
-        
-        
-        
-        
+
         present (alert, animated: true, completion: nil)
-        
     }
+    
+    //MARK: - Read Rules
     
     @IBAction func readRulesPressed(_ sender: UIButton) {
-        
         self.performSegue(withIdentifier: "ReadRules", sender: self)
     }
-    
-    
 }
 
-
-
-
-
-
+//MARK: - Text Field Delegate Methods
 
 extension ViewController: UITextFieldDelegate{
     
     @IBAction func playerOneName(_ sender: UITextField) {
-        
         print (playerTwoNameText.text!)
-        
-        
     }
     
     @IBAction func playerTwoName(_ sender: UITextField) {
         print (playerTwoNameText.text!)
-        
     }
-    
-    
-//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-//        if textField.text != nil{
-//            return true
-//        }else {
-//            textField.placeholder = "Did you see cows?"
-//            return false
-//        }
-//    }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         let newPlayerOneName = playerOneNameText.text
         print(newPlayerOneName!)
@@ -790,10 +441,6 @@ extension ViewController: UITextFieldDelegate{
         print (newPlayerTwoName!)
         userDefaults.set(newPlayerTwoName, forKey: "PlayerTwoName")
         print(userDefaults.value(forKey: "PlayerTwoName")!)
-        
-        
-        
-        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -805,25 +452,5 @@ extension ViewController: UITextFieldDelegate{
         }else {
             print("No players")
         }
-        
-//        if textField.text == "0"{
-//            textField.text = ""
-//        }else{
-//            textField.text = "0"
-//        }
-    
-        
     }
-    
-    
-    
-//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-//        if textField.text == "0"{
-//            return true
-//        }else{
-//            textField.text = "0"
-//            return false
-//        }
-//    }
-    
 }
