@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2E027DC42979ED290073BE11 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E027DC32979ED290073BE11 /* Keys.swift */; };
-		2E29FF892974611600D44430 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2E29FF882974611600D44430 /* Realm */; };
-		2E29FF8B2974611600D44430 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2E29FF8A2974611600D44430 /* RealmSwift */; };
 		2E3ED9E72971B2A800150CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3ED9E62971B2A800150CF3 /* AppDelegate.swift */; };
 		2E3ED9E92971B2A800150CF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3ED9E82971B2A800150CF3 /* SceneDelegate.swift */; };
 		2E3ED9EB2971B2A800150CF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3ED9EA2971B2A800150CF3 /* ViewController.swift */; };
@@ -38,8 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E29FF8B2974611600D44430 /* RealmSwift in Frameworks */,
-				2E29FF892974611600D44430 /* Realm in Frameworks */,
 				2EB2E40529738E2200E1E0A7 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,8 +126,6 @@
 			name = "Cow Cemetery";
 			packageProductDependencies = (
 				2EB2E40429738E2200E1E0A7 /* IQKeyboardManagerSwift */,
-				2E29FF882974611600D44430 /* Realm */,
-				2E29FF8A2974611600D44430 /* RealmSwift */,
 			);
 			productName = "Cow Cemetery";
 			productReference = 2E3ED9E32971B2A800150CF3 /* Cow Cemetery.app */;
@@ -163,7 +157,6 @@
 			mainGroup = 2E3ED9DA2971B2A800150CF3;
 			packageReferences = (
 				2EB2E40329738E2200E1E0A7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				2E29FF872974611500D44430 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 2E3ED9E42971B2A800150CF3 /* Products */;
 			projectDirPath = "";
@@ -343,7 +336,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 4224Q87F2F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cow Cemetery/Info.plist";
@@ -359,7 +352,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bengauger.Cow-Cemetery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -378,7 +371,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 4224Q87F2F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cow Cemetery/Info.plist";
@@ -394,7 +387,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bengauger.Cow-Cemetery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -430,14 +423,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2E29FF872974611500D44430 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		2EB2E40329738E2200E1E0A7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -449,16 +434,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2E29FF882974611600D44430 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2E29FF872974611500D44430 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		2E29FF8A2974611600D44430 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2E29FF872974611500D44430 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
 		2EB2E40429738E2200E1E0A7 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2EB2E40329738E2200E1E0A7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
