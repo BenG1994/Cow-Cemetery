@@ -2,7 +2,7 @@
 
 ![120](https://user-images.githubusercontent.com/113778995/215942368-69ebeb09-729d-4053-b237-a28b8994d21f.png)
 
-Cow Cemetery is a road trip game that takes a Midwestern staple and brings it to your pocket. Simply count the cows you see on your side of the road and add them up. But if you spot a cemetery, you lose half of your total. 
+Cow Cemetery is a road trip game that takes a Midwestern staple and brings it to your pocket. Simply count the cows you see on your side of the road and add them up. But if you spot a cemetery, you lose half of your total. Download now from the [App Store](https://apps.apple.com/us/app/cow-cemetery/id1665221452).
 
 ## Introduction
 
