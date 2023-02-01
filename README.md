@@ -1,4 +1,4 @@
-# Cow-Cemetery
+# Cow Cemetery
 
 ![120](https://user-images.githubusercontent.com/113778995/215942368-69ebeb09-729d-4053-b237-a28b8994d21f.png)
 
