@@ -234,6 +234,7 @@ class ViewController: UIViewController {
         self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: K.totalCowsOne)!) cows"
         
         addCemeteryEmoji()
+        addCowEmojiOne()
 
         print(UserDefaults.standard.object(forKey: K.cemeteryEmojiOne)!)
         
