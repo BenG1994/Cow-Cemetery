@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 class ViewController: UIViewController {
     
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let userDefaults = UserDefaults.standard
+    let textUserDefaults = UserDefaults(suiteName: "group.CowCemetery")!
         
     var cemeteryEmojis: [String] = []
     var cemeteryEmojisTwo: [String] = []
@@ -36,8 +38,8 @@ class ViewController: UIViewController {
         playerOneNameText.delegate = self
         playerTwoNameText.delegate = self
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "cow background dark.png")!)
-        playerOneNameText.text = userDefaults.value(forKey: "PlayerOneName") as? String ?? "Player 1"
-        playerTwoNameText.text = userDefaults.value(forKey: "PlayerTwoName") as? String ?? "Player 2"
+        playerOneNameText.text = textUserDefaults.value(forKey: "PlayerOneName") as? String ?? "Player 1"
+        playerTwoNameText.text = textUserDefaults.value(forKey: "PlayerTwoName") as? String ?? "Player 2"
 
         if userDefaults.value(forKey: K.totalCowsOne) != nil {
             numberOfCowsPlayerOne.text = "\(UserDefaults.standard.integer(forKey: K.totalCowsOne)) cows"
@@ -124,11 +126,13 @@ class ViewController: UIViewController {
                 print(firstCows)
                 totalCows += firstCows
                 self.userDefaults.set(totalCows, forKey: K.totalCowsOne)
+                self.textUserDefaults.set(totalCows, forKey: K.totalCowsOneWidget)
                 print(totalCows)
                 self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: K.firstCowsOne)!) cows"
                 self.addCowEmojiOne()
                 self.userDefaults.set(cowArrayOne, forKey: K.cowsOne)
                 print(cowArrayOne.joined())
+                WidgetCenter.shared.reloadAllTimelines()
             }else if self.numberOfCowsPlayerOne.text != "# of Cows"{
                 additionalCows = cowsNumber ?? 0
                 print(additionalCows)
@@ -136,11 +140,13 @@ class ViewController: UIViewController {
                 totalCows += additionalCows
                 print(totalCows)
                 self.userDefaults.set(totalCows, forKey: K.totalCowsOne)
+                self.textUserDefaults.set(totalCows, forKey: K.totalCowsOneWidget)
                 print(totalCows)
                 self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: K.totalCowsOne)!) cows"
                 self.addCowEmojiOne()
                 self.userDefaults.set(cowArrayOne, forKey: K.cowsOne)
                 print(cowArrayOne.joined())
+                WidgetCenter.shared.reloadAllTimelines()
             }
         }
         
@@ -154,6 +160,7 @@ class ViewController: UIViewController {
         alert.addAction(actionCancel)
 
         present (alert, animated: true, completion: nil)
+        
     }
     
     func addCowEmojiOne() {
@@ -220,14 +227,15 @@ class ViewController: UIViewController {
     
     @IBAction func playerOneCemetery(_ sender: UIButton) {
         
-        let cemeteryCows = UserDefaults.standard.integer(forKey: K.totalCowsOne) / 2
-        self.userDefaults.set(cemeteryCows, forKey: K.totalCowsOne)
-        print("\(cemeteryCows) start off cemetery func")
+        let totalCows = UserDefaults.standard.integer(forKey: K.totalCowsOne) / 2
+        self.userDefaults.set(totalCows, forKey: K.totalCowsOne)
+        self.textUserDefaults.set(totalCows, forKey: K.totalCowsOneWidget)
+        print("\(totalCows) start off cemetery func")
         self.numberOfCowsPlayerOne.text = "\(self.userDefaults.string(forKey: K.totalCowsOne)!) cows"
         
         addCemeteryEmoji()
         addCowEmojiOne()
-        
+
         print(UserDefaults.standard.object(forKey: K.cemeteryEmojiOne)!)
         
         let alert = UIAlertController(title: "Cemetery!", message: "Your opponent spotted a cemetery on your side. Half your cows have died.", preferredStyle: .alert)
@@ -237,11 +245,13 @@ class ViewController: UIViewController {
           // your code with delay
           alert.dismiss(animated: true, completion: nil)
         }
+        WidgetCenter.shared.reloadAllTimelines()
             
         func addCemeteryEmoji() {
             cemeteryEmojis.append("🪦")
             print(cemeteryEmojis)
             self.playerOneCemeteries.text = "\(cemeteryEmojis.joined())"
+            self.textUserDefaults.set(cemeteryEmojis.count, forKey: K.cemeteryOneText)
             userDefaults.set(cemeteryEmojis, forKey: K.cemeteryEmojiOne)
         }
     }
@@ -268,6 +278,7 @@ class ViewController: UIViewController {
                 print("\(totalCows) might be the problem")
                 totalCows += firstCows
                 self.userDefaults.set(totalCows, forKey: K.totalCowsTwo)
+                self.textUserDefaults.set(totalCows, forKey: K.totalCowsTwoWidget)
                 print("\(totalCows) first cows user default set")
                 self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: K.firstCowsTwo)!) cows"
                 self.addCowEmojiTwo()
@@ -278,9 +289,11 @@ class ViewController: UIViewController {
                 totalCows += additionalCows
                 print("\(totalCows) total cows after seeing more")
                 self.userDefaults.set(totalCows, forKey: K.totalCowsTwo)
+                self.textUserDefaults.set(totalCows, forKey: K.totalCowsTwoWidget)
                 print("\(totalCows) after user defaults set")
                 self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: K.totalCowsTwo)!) cows"
                 self.addCowEmojiTwo()
+                WidgetCenter.shared.reloadAllTimelines()
             }
         }
 
@@ -360,9 +373,10 @@ class ViewController: UIViewController {
     
     @IBAction func playerTwoCemetery(_ sender: UIButton) {
         
-        let cemeteryCows = UserDefaults.standard.integer(forKey: K.totalCowsTwo) / 2
-        self.userDefaults.set(cemeteryCows, forKey: K.totalCowsTwo)
-        print("\(cemeteryCows) start off cemetery func")
+        let totalCows = UserDefaults.standard.integer(forKey: K.totalCowsTwo) / 2
+        self.userDefaults.set(totalCows, forKey: K.totalCowsTwo)
+        self.textUserDefaults.set(totalCows, forKey: K.totalCowsTwoWidget)
+        print("\(totalCows) start off cemetery func")
         self.numberOfCowsPlayerTwo.text = "\(self.userDefaults.string(forKey: K.totalCowsTwo)!) cows"
     
         addCemeteryEmojiTwo()
@@ -374,12 +388,15 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: when){
           alert.dismiss(animated: true, completion: nil)
         }
+        WidgetCenter.shared.reloadAllTimelines()
         
         func addCemeteryEmojiTwo() {
             cemeteryEmojisTwo.append("🪦")
             print(cemeteryEmojisTwo)
             self.playerTwoCemeteries.text = "\(cemeteryEmojisTwo.joined())"
+            self.textUserDefaults.set(cemeteryEmojisTwo.count, forKey: "TwoCemeteries")
             userDefaults.set(cemeteryEmojisTwo, forKey: K.cemeteryEmojiTwo)
+            
         }
     }
     
@@ -391,17 +408,24 @@ class ViewController: UIViewController {
         let actionStart = UIAlertAction(title: "Start", style: .destructive) {(action) in
             
             self.userDefaults.set(0, forKey: K.totalCowsOne)
+            self.textUserDefaults.set(0, forKey: K.totalCowsOneWidget)
             self.userDefaults.set(0, forKey: K.totalCowsTwo)
+            self.textUserDefaults.set(0, forKey: K.totalCowsTwoWidget)
+            self.textUserDefaults.set(0, forKey: K.cemeteryOneText)
+            self.textUserDefaults.set(0, forKey: K.cemeteryTwoText)
             self.userDefaults.set([], forKey: K.cemeteryEmojiOne)
             self.userDefaults.set([], forKey: K.cemeteryEmojiTwo)
             self.userDefaults.set(0, forKey: K.firstCowsOne)
             self.userDefaults.set(0, forKey: K.firstCowsTwo)
+            self.userDefaults.set("", forKey: K.playerOneCowText)
+            self.userDefaults.set("", forKey: K.playerTwoCowText)
             self.playerTwoCows.text = ""
             self.playerOneCows.text = ""
             self.numberOfCowsPlayerOne.text = "# of cows"
             self.numberOfCowsPlayerTwo.text = "# of cows"
             self.playerOneCemeteries.text = ""
             self.playerTwoCemeteries.text = ""
+            WidgetCenter.shared.reloadAllTimelines()
         }
         
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -434,13 +458,14 @@ extension ViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         let newPlayerOneName = playerOneNameText.text
         print(newPlayerOneName!)
-        userDefaults.set(newPlayerOneName, forKey: "PlayerOneName")
-        print(userDefaults.value(forKey: "PlayerOneName")!)
+        textUserDefaults.set(newPlayerOneName, forKey: "PlayerOneName")
+        print(textUserDefaults.value(forKey: "PlayerOneName")!)
         
         let newPlayerTwoName = playerTwoNameText.text
         print (newPlayerTwoName!)
-        userDefaults.set(newPlayerTwoName, forKey: "PlayerTwoName")
-        print(userDefaults.value(forKey: "PlayerTwoName")!)
+        textUserDefaults.set(newPlayerTwoName, forKey: "PlayerTwoName")
+        print(textUserDefaults.value(forKey: "PlayerTwoName")!)
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
