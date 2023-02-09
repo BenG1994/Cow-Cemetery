@@ -400,6 +400,11 @@ class ViewController: UIViewController {
         }
     }
     
+    func removeCemeteries() {
+        cemeteryEmojis.removeAll()
+        cemeteryEmojisTwo.removeAll()
+    }
+    
     //MARK: - New Game
     
     @IBAction func newGamePressed(_ sender: UIButton) {
@@ -413,8 +418,13 @@ class ViewController: UIViewController {
             self.textUserDefaults.set(0, forKey: K.totalCowsTwoWidget)
             self.textUserDefaults.set(0, forKey: K.cemeteryOneText)
             self.textUserDefaults.set(0, forKey: K.cemeteryTwoText)
-            self.userDefaults.set([], forKey: K.cemeteryEmojiOne)
-            self.userDefaults.set([], forKey: K.cemeteryEmojiTwo)
+            self.removeCemeteries()
+            self.userDefaults.setValue([], forKey: K.cemeteryEmojiOne)
+            self.userDefaults.setValue([], forKey: K.cemeteryEmojiTwo)
+            
+            print ("\(self.userDefaults.array(forKey: K.cemeteryEmojiOne))after new game pressed")
+            print ("\(self.userDefaults.array(forKey: K.cemeteryEmojiTwo))after new game pressed")
+         
             self.userDefaults.set(0, forKey: K.firstCowsOne)
             self.userDefaults.set(0, forKey: K.firstCowsTwo)
             self.userDefaults.set("", forKey: K.playerOneCowText)
