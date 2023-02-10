@@ -22,12 +22,19 @@ Once the math was figured out, the rest of the app was (mostly) smooth sailing. 
 
 I decided to save all the users data, such as player names, their cow count, and all the emojis using User Defaults because everything was strings, so it wouldn't be too taxing on the app to handle that. 
 
-After that, all that was needed was to add a new game button which reset everything. Below is a screenshot from the app.
+After that, all that was needed was to add a new game button which reset everything. Below is a screenshot from the app. I also created a seperate view that details the rules of the game.
 
-<img src="https://user-images.githubusercontent.com/113778995/215946489-76f6b732-b9ca-4e30-b177-ffd010aa91e1.PNG" width="200">
+<img src="https://user-images.githubusercontent.com/113778995/215946489-76f6b732-b9ca-4e30-b177-ffd010aa91e1.PNG" width="200"> <img src="https://user-images.githubusercontent.com/113778995/217966776-ba04eae2-5bc7-4018-b911-c4bbed8a1420.png" width="200">
+
+## Widget
+
+In a way to expand the functionality of a fairly simply app, I decided to try and add a widget extension to the app. For a widget of this kind, the process was fairly straightforward. All I needed to do was to connect the main app and the widget through app groups. Then I was able to pass all the information (player names, number of cows, and number of cemeteries) through with user defaults as everything was text based. In this case, I only have the widget update when a user changes any of the data in the app, such as adding cows or seeing a cemetery. To have the widget update on its own would be a waste of phone resources as it wouldn't change. 
+
+Taking some time to learn how widgets work, specifically with the timeline and entires, was a good experience as they are a very interesting tool that can be used for future projects. 
+
+![Simulator Screen Recording - iPhone 14 Pro - 2023-02-09 at 17 56 01](https://user-images.githubusercontent.com/113778995/217966327-722cb346-b305-470d-b754-88f6e3dcbfde.gif)  ![Simulator Screen Recording - iPhone 14 Pro - 2023-02-09 at 18 01 46](https://user-images.githubusercontent.com/113778995/217966489-260b9428-f230-41be-baff-21102536e555.gif)
+
 
 ## Reflection
 
 Cow Cemetery was a fun app for me to work on becauase it's a game that I've been playing for so long. It offered different challenges than my previous projects and allowed me to conquer simple math in the process. It was a completely different type of project and turned out simple and rather elegant into a game that can be played and enjoyed by anyone.
-
-In the future, I plan to add a widget to see each players cow totals at a glance.
