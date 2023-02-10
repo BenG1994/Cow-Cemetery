@@ -13,6 +13,8 @@ Cow Cemetery has been a game my family has played on road trips for over 15 year
 * Swift 5
 * Persisted all user data (player names, number of cows, number of cemeteries, and number of cemeteries) using User Defaults
 * Used computed properties for some math in adding cows
+* WidgetKit
+* SwiftUI
 
 ## Process and challenges
 
