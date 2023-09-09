@@ -115,7 +115,9 @@ struct CowWidget: Widget {
         }
         .configurationDisplayName("Cow Cemetery")
         .description("See a real time count of your cows and cemeteries.")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemSmall,
+            .accessoryCircular,
+            .accessoryRectangular])
     }
 }
 
